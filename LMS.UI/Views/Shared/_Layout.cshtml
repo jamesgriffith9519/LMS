@@ -37,9 +37,17 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="page-footer">
+            <h4>
+                placeholder
+            </h4>
+            <div class="footer-copyright text-center py-3">
+                Copyright @@ James Griffith @DateTime.Now.Year
+            </div>
+            <!-- Copyright -->
+
         </footer>
+        <!-- Footer -->
     </div>
 
     @Scripts.Render("~/bundles/jquery")

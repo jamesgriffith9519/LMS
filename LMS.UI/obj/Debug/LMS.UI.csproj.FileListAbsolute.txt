@@ -103,3 +103,6 @@ C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI
 C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI\obj\Debug\LMS.UI.csproj.CopyComplete
 C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI\obj\Debug\LMS.UI.dll
 C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI\obj\Debug\LMS.UI.pdb
+C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI\bin\LMS.DATA.dll
+C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI\bin\LMS.DATA.pdb
+C:\Users\Student\Documents\Visual Studio 2017\Projects\12_PROJECT\LMS\src\LMS.UI\bin\LMS.DATA.dll.config

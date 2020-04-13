@@ -157,7 +157,10 @@ namespace LMS.UI.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
+                    UserManager.AddToRole(user.Id, "employee");
                     return View("DisplayEmail");
+
+                    
                 }
                 AddErrors(result);
             }
