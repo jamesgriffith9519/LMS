@@ -86,7 +86,7 @@ namespace LMS.UI.Controllers
                         fupPdf.SaveAs(Server.MapPath("~/content/pdfs/" + pdfName));
                     }
                     //if the block above failed to run they gave us a file with an extension not approved above. , lots of options to handle this, we could supply error message.
-                    //here we will just ignore the file and set this to default no image...
+                    //here we will just ignore the file and set this to default noContent.pdf
                     else
                     {
                         pdfName = "NoContent.pdf";
