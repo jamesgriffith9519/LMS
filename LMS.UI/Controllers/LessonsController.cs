@@ -57,10 +57,44 @@ namespace LMS.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LessonId,LessonTitle,CourseId,Introduction,VideoUrl,PdfFileName,IsActive")] Lesson lesson)
+        public ActionResult Create([Bind(Include = "LessonId,LessonTitle,CourseId,Introduction,VideoUrl,PdfFileName,IsActive")] Lesson lesson, HttpPostedFileBase fupPdf)
         {
             if (ModelState.IsValid)
             {
+                string pdfName = "NoContent.pdf";//set a variable for pdf file name. default for no pdf.
+                                                 //db.Lessons.Add(lesson);
+                                                 //db.SaveChanges();
+                                                 //return RedirectToAction("Index");
+                if (fupPdf != null)
+                {
+                    //get the fileName (for extension)
+                    pdfName = fupPdf.FileName;
+                    //get the file extension from that 
+                    string ext = pdfName.Substring(pdfName.LastIndexOf("."));
+
+                    //create a safelist or (whitelist) of extensions 
+                    string[] goodExts = new string[] { ".pdf"};
+
+                    //only use this file if it meets our extension criteria
+
+                    if (goodExts.Contains(ext.ToLower()))
+                    {
+                        //make sure filename is unique to our system. otherwise we just overwrote a previous records image. 
+                        //easiest and most reliable technique is GUID + extension.
+                        pdfName = Guid.NewGuid().ToString() + ext;
+                        //drop that file into the correct folder in the website.
+                        fupPdf.SaveAs(Server.MapPath("~/content/pdfs/" + pdfName));
+                    }
+                    //if the block above failed to run they gave us a file with an extension not approved above. , lots of options to handle this, we could supply error message.
+                    //here we will just ignore the file and set this to default no image...
+                    else
+                    {
+                        pdfName = "NoContent.pdf";
+
+                    }
+
+                }
+                lesson.PdfFileName = pdfName;
                 db.Lessons.Add(lesson);
                 db.SaveChanges();
                 return RedirectToAction("Index");

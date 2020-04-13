@@ -7,15 +7,34 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <h1>@Html.DisplayFor(modelItem => Model.LessonTitle) </h1>
             <h4><strong>Course:</strong> @Html.DisplayFor(modelItem => Model.Cours.CourseName)</h4>
             <br />
             <p>@Html.DisplayFor(modelItem => Model.Introduction)</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12" style="height:70vh;">
+            @*<iframe src="~/Content/pdfs/@Model.PdfFileName" style="max-height: 100%; max-width: 100%; height: 500px; width:100%;"></iframe>*@
+            <iframe src="~/Content/pdfs/@Model.PdfFileName" style="height:100%; width:100%"></iframe>         
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <br />
+            <input class="btn btn-primary" type="button" onclick="CompleteLesson" name="name" value="Complete Lesson" />
+        </div>
+    </div>
 </div>
 
+@section Scripts {
+    <script>
+        function CompleteLesson() {
+
+        }
+    </script>
+}
 
 @*<h2>Details</h2>
 
