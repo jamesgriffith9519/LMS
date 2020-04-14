@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LMS.DATA;
+using Microsoft.AspNet.Identity;
+using System.Net.Mail;
 
 namespace LMS.UI.Controllers
 {
@@ -24,24 +26,80 @@ namespace LMS.UI.Controllers
         }
 
 
-          public ActionResult LessonListSpecfic()
+        public ActionResult LessonListSpecfic()
         {
             var lessons = db.Lessons.Include(l => l.Cours);
             return View(lessons.Where(x => x.Cours.CourseId == x.CourseId).ToList());
         }
 
         // GET: Lessons/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
+            #region logic for recording lessons eompleted once employee views details page
+
+            string userId = User.Identity.GetUserId();
+
+            LessonView lessonView = new LessonView();
+            lessonView.UserId = userId;
+            lessonView.LessonId = id;
+            lessonView.DateViewed = DateTime.Now;
+
+            //prevent duplicate records 
+            var firstView = db.LessonViews.Where(x => x.LessonId == id && x.UserId == userId).FirstOrDefault();
+            if (User.IsInRole("employee") && firstView == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.LessonViews.Add(lessonView);
+                db.SaveChanges();
             }
+
+            #endregion
+
+            #region logic for coursecompletion
             Lesson lesson = db.Lessons.Find(id);
-            if (lesson == null)
+            int courseLessonCount = db.Lessons.Where(x => x.CourseId == lesson.CourseId && x.IsActive == true).Count();
+            int completedLessonCount = db.LessonViews.Where(x => x.Lesson.CourseId == lesson.CourseId && x.UserId == userId && x.Lesson.IsActive == true).Count();
+
+            if (User.IsInRole("employee") && courseLessonCount == completedLessonCount)
             {
-                return HttpNotFound();
+                CourseCompletion completion = new CourseCompletion();
+                completion.UserId = userId;
+                completion.CourseId = lesson.CourseId;
+                completion.DateCompleted = DateTime.Now;
+
+                //prevent duplicates
+                var firstCompletion = db.CourseCompletions.Where(x => x.UserId == userId && x.CourseId == lesson.CourseId).FirstOrDefault();
+                if (firstCompletion == null)
+                {
+                    db.CourseCompletions.Add(completion);
+                    db.SaveChanges();
+
+                    string courseCompleter = db.UserDetails.Where(x => x.UserId == userId).FirstOrDefault().UserId;
+                    string completedCourse = db.Courses.Where(x => x.CourseId == lesson.CourseId).FirstOrDefault().CourseName;
+                    var completedDate = completion.DateCompleted;
+
+                    string courseFinishMessage = $"{courseCompleter} completed the {completedCourse} course on {completedDate}";
+
+                    MailMessage m = new MailMessage("postmaster@jamesgriffithdev.com", "james.griffith3@outlook.com", "Course Completion", courseFinishMessage);
+                    m.IsBodyHtml = true;
+                    m.Priority = MailPriority.High;
+                    SmtpClient client = new SmtpClient("mail.jamesgriffithdev.com");
+                    client.Credentials = new NetworkCredential("postmaster@jamesgriffithdev.com", "!James9601");
+                    client.Port = 8889;
+                    client.Send(m);
+                }
             }
+
+            #endregion
+
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Lesson lesson = db.Lessons.Find(id);
+            //if (lesson == null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View(lesson);
         }
 
@@ -73,7 +131,7 @@ namespace LMS.UI.Controllers
                     string ext = pdfName.Substring(pdfName.LastIndexOf("."));
 
                     //create a safelist or (whitelist) of extensions 
-                    string[] goodExts = new string[] { ".pdf"};
+                    string[] goodExts = new string[] { ".pdf" };
 
                     //only use this file if it meets our extension criteria
 

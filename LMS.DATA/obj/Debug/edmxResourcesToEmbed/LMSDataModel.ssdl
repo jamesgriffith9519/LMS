@@ -106,7 +106,7 @@
     <Key>
       <PropertyRef Name="LessonViewId" />
     </Key>
-    <Property Name="LessonViewId" Type="int" Nullable="false" />
+    <Property Name="LessonViewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateViewed" Type="date" Nullable="false" />
     <Property Name="LessonId" Type="int" Nullable="false" />
