@@ -1,0 +1,185 @@
+﻿@model IEnumerable<LMS.DATA.Entry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container-fluid" style="padding-top:2em;">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserDetail.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlaceOfPurchase)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfPurchase)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountOfPurchase) (Oz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Metal.Metal_Name)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserDetail.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaceOfPurchase)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfPurchase)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AmountOfPurchase)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Metal.Metal_Name)
+                    </td>
+
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.EntryId }) |*@
+                        @Html.ActionLink("Details", "Details", new { id = item.EntryId })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EntryId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" style="text-align:right;">Total:</th>
+                <th></th>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    @*<h4 id="totalGoldValue" class="currency-usd"></h4>*@
+    <h1 id="totalTest" style="display:none;"></h1>
+    <p id="holdingForGold" style="display:none;">@ViewBag.totalGold</p>
+    <h4 id="goldTotal"></h4>
+    <br />
+    <p id="holdingForSilver" style="display:none;">@ViewBag.totalSilver</p>
+    <h4 id="silverTotal"></h4>
+</div>
+
+@section scripts {
+    <script>
+        //    $(document).ready(function() {
+        //$('#myTable').DataTable();
+        //    });
+
+
+        //    total = api
+        //        .column(3)
+        //        .data()
+        //        .reduce(function (a, b) {
+        //            return intVal(a) + intVal(b);
+        //        }, 0);
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "footerCallback": function(row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                    };
+
+                    //$(document).ready(function() {
+                    //    var table = $('#myTable').DataTable( {
+                    //        rowReorder: {
+                    //            selector: 'td:nth-child(2)'
+                    //        },
+                    //        responsive: true
+                    //    } );
+                    //} );
+
+                    // Total over all pages
+                    total = api
+                        .column(3)
+                        .data()
+                        .reduce(function(a, b) {
+                                return intVal(a) + intVal(b);
+                            },
+                            0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(3, { page: 'current' })
+                        .data()
+                        .reduce(function(a, b) {
+                                return intVal(a) + intVal(b);
+                            },
+                            0);
+
+                    // Update footer
+                    $(api.column(3).footer()).html("Total Ounces: " + total);
+                    /*'' + pageTotal + ' ( ' + total + ' total)' */ //may need to change this later on that way it doesnt have a format of "total x (x total) also removed the $ before page total and total to remove currency formatting displayed
+                    //);
+                }
+            });
+            //var totalz = total * 1505.45
+            //document.getElementById("totalz").append(" $" + totalz)
+            document.getElementById("totalTest").innerHTML = total;
+        });
+
+        //var url = 'https://metals-api.com/api/latest?access_key=jw8dng3i36ts4os4vrav2nvfi5prti8637tsy9l7b2j1wsd5ux1i4s6t0f09';
+
+        $(function () {
+
+            $.getJSON(url).done(function (success) {
+                var currentGoldPrice = 1 / success.rates.XAU;
+                console.log(currentGoldPrice);
+                //document.getElementById("goldTotal").innerHTML = "Total Gold Value (USD): $" + Math.round(holdingForGold.innerHTML * currentGoldPrice);
+                document.getElementById("goldTotal").innerHTML = "Total Gold Ounces: (@ViewBag.totalGold) " + "Value: $"  + Math.round(holdingForGold.innerHTML * currentGoldPrice);
+                //console.log(success.rates.XAU)
+                //var currentGoldPrice = 1 / success.rates.XAU;
+                //console.log(currentGoldPrice);
+                //success.rates.USD
+
+            });
+            //when done getting API JSON DATA handler...(basically show the temperature in the pop-up-div)
+        });//end function block to get json data from the api and use it on screen
+
+        $('.currency-usd').each(function () {
+            var monetary_value = $(this).text();
+            var i = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(monetary_value);
+            $(this).text(i);
+        });
+
+        $(function () {
+
+            $.getJSON(url).done(function (success) {
+                var currentSilverPrice = 1 / success.rates.XAG;
+                console.log(currentSilverPrice);
+                document.getElementById("silverTotal").innerHTML = "Total Silver Value (USD): $" + Math.round(holdingForSilver.innerHTML * currentSilverPrice);
+
+
+            });
+            //when done getting API JSON DATA handler...(basically show the temperature in the pop-up-div)
+        });//end
+
+
+
+    </script>
+
+}

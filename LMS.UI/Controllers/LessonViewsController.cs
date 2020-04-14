@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LMS.DATA;
+using Microsoft.AspNet.Identity;
 
 namespace LMS.UI.Controllers
 {
@@ -17,8 +18,10 @@ namespace LMS.UI.Controllers
         // GET: LessonViews
         public ActionResult Index()
         {
+            var userId = User.Identity.GetUserId();
             var lessonViews = db.LessonViews.Include(l => l.Lesson).Include(l => l.UserDetail);
-            return View(lessonViews.ToList());
+            //return View(lessonViews.ToList());
+            return View(lessonViews.Where(x => x.UserId == userId).ToList());
         }
 
         // GET: LessonViews/Details/5

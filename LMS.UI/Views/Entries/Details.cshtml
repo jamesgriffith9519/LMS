@@ -1,0 +1,58 @@
+﻿@model LMS.DATA.Entry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Entry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceOfPurchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfPurchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfPurchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfPurchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountOfPurchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountOfPurchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Metal.Metal_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Metal.Metal_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EntryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

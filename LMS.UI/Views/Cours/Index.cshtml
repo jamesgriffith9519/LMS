@@ -4,42 +4,132 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CourseDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourseId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CourseId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseId })
-        </td>
-    </tr>
-}
 
-</table>
+<div class="container-fluid" style="padding-top:2em;">
+    @*<h2>Courses</h2>*@
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Our Courses</h1>
+            <br />
+            <table class="table" style="width:100%;">
+                <tr style="background-color: #6075DE;">
+                    <th>
+                        <strong>@Html.DisplayNameFor(model => model.CourseName)</strong>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseDescription)
+                    </th>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </th>
+                    }
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@Html.DisplayFor(modelItem => item.CourseName)</strong>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CourseDescription)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CourseId })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+                                @Html.ActionLink("Details", "Details", new { id = item.CourseId })
+                            </td>
+                        }
+                        else if (User.Identity.IsAuthenticated)
+                        {
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.CourseId })
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <div class="col-md-6">
+            <img src="~/Content/imgs/1518468864.jpg" alt="Alternate Text" style="width:auto;height:100%; max-height:100%; max-width:100%;" />
+        </div>
+    </div>
+</div>
+@*<div class="container-fluid" style="padding-top:2em;">
+        <h2>Courses</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table" style="width:50%;">
+            <tr style="background-color: #6075DE;">
+                <th>
+                    <strong>@Html.DisplayNameFor(model => model.CourseName)</strong>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseDescription)
+                </th>
+                @if (User.IsInRole("Admin"))
+                {
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                }
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <strong>@Html.DisplayFor(modelItem => item.CourseName)</strong>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseDescription)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CourseId })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+                        @Html.ActionLink("Details", "Details", new { id = item.CourseId })
+                    </td>
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.CourseId })
+                    </td>
+                }
+            </tr>
+            }
+
+        </table>
+
+    </div>*@
