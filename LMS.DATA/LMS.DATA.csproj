@@ -62,7 +62,6 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>LMSDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Cours.cs">
       <DependentUpon>LMSDataModel.tt</DependentUpon>
     </Compile>
@@ -96,6 +95,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LMSDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MetaData\LMSMetaData.cs" />
     <Compile Include="Metal.cs">
       <DependentUpon>LMSDataModel.tt</DependentUpon>
     </Compile>
