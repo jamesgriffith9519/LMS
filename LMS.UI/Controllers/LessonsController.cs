@@ -94,7 +94,9 @@ namespace LMS.UI.Controllers
                     }
 
                 }
+
                 lesson.PdfFileName = pdfName;
+
                 db.Lessons.Add(lesson);
                 db.SaveChanges();
                 return RedirectToAction("Index");
