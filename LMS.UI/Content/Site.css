@@ -56,6 +56,7 @@ input[type="checkbox"].input-validation-error {
 
     .navbar-inverse .navbar-nav li {
         background-color: #072F5F;
+        margin-right:.5em;
     }
 
     .navbar-inverse .navbar-nav li a:hover {
@@ -139,4 +140,28 @@ input[type="checkbox"].input-validation-error {
     }
 body {
     padding-bottom:0;
+}
+
+.dropdown-menu {
+    background-color: #072F5F;
+}
+
+.dropdown-item:hover {
+    font-size: 2em;
+    margin: 1em;
+}
+
+#testDropdown:hover {
+    font-size: 1.5em !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+#testDropdown2:hover {
+    font-size: 1.5em !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
 }
