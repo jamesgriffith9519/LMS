@@ -120,6 +120,7 @@ input[type="checkbox"].input-validation-error {
 #IndexCenterSection {
     background-color: #6075DE;
     border-top: solid;
+    margin-bottom:2em;
 }
 
 .IndexPics {

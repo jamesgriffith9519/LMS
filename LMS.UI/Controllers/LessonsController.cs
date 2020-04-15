@@ -193,14 +193,54 @@ namespace LMS.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LessonId,LessonTitle,CourseId,Introduction,VideoUrl,PdfFileName,IsActive")] Lesson lesson)
+        public ActionResult Edit([Bind(Include = "LessonId,LessonTitle,CourseId,Introduction,VideoUrl,PdfFileName,IsActive")] Lesson lesson,HttpPostedFileBase fupPdf)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(lesson).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", lesson.CourseId);
+        //    return View(lesson);
+        //}
         {
             if (ModelState.IsValid)
-            {
+            {            
+                if (fupPdf != null)
+                {
+                    //get the fileName (for extension)
+                    string pdfName = fupPdf.FileName;
+                    //get the file extension from that 
+                    string ext = pdfName.Substring(pdfName.LastIndexOf("."));
+
+                    //create a safelist or (whitelist) of extensions 
+                    string[] goodExts = new string[] { ".pdf" };
+
+                    //only use this file if it meets our extension criteria
+
+                    if (goodExts.Contains(ext.ToLower()))
+                    {
+                        //make sure filename is unique to our system. otherwise we just overwrote a previous records pdf
+                        //easiest and most reliable technique is GUID + extension.
+                        pdfName = Guid.NewGuid().ToString() + ext;
+                        //drop that file into the correct folder in the website.
+                        fupPdf.SaveAs(Server.MapPath("~/content/pdfs/" + pdfName));
+
+                        if (lesson.PdfFileName != null && lesson.PdfFileName != "NoContent.pdf")
+                        {
+                            System.IO.File.Delete(Server.MapPath("~/content/pdfs/" + lesson.PdfFileName));
+                        }
+                        lesson.PdfFileName = pdfName;
+                    }
+
+
+                }
                 db.Entry(lesson).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", lesson.CourseId);
             return View(lesson);
         }
