@@ -1,12 +1,72 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<hgroup>
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-</hgroup>
-<div class="row-fluid">
-    <div class="span12">
-        <p>Use this area to provide additional information.</p>
+<div class="container-fluid" style="margin:2em;">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Project Brief:</h1>
+            <p>This project is a secure data-driven ASP.NET MVC application designed to simulate a LMS (Learning Management System). This project was created from design through deployment for managing the tracking and organization of online trainings for employees of a ficticious company. </p>
+            <br />
+            <h4><strong>User Capabilities</strong></h4>
+            <ul>
+                Admins
+                
+                <li>
+                    CRUD (create, read, update, and delete) functionality for courses.
+                </li>
+                <li>
+                    CRUD functionality for lessons.
+                </li>
+                <li>
+                    Upload PDF's and video URL's as lesson resources.
+                </li>
+                <li>View and manage unpublished courses.</li>
+            </ul>
+           <ul>
+               Managers
+               <li>
+                   View employee progress towards requirement for completing 6 courses for the year. 
+               </li>
+               <li>
+                   View courses and lessons completed.
+               </li>
+               <li>
+                   Get notified via email when an employee completes a course.
+               </li>
+           </ul>
+            <ul>
+                Employee
+                <li>
+                    View Lessons.
+                </li>
+                <li>
+                    View personal progress toward requirement of 6 courses for the year.
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <img src="~/Content/imgs/Team-project-2.jpg" style="max-height: 100%; max-width:100%;" />
+        </div>
+        @*<div class="col-md-4">
+            <img src="~/Content/imgs/aboutlmslogo.png" style="max-height: 100%; max-width:100%; width:auto;" />
+        </div>*@
+
     </div>
+    <hr />
+    <div class="row" style="margin-bottom:3em;">
+        <div class="col-md-4">
+            <img src="~/Content/imgs/aboutlmslogo.png" style="height:100%; width:auto; max-height:100%; max-width:100%;" />
+        </div>
+        <div class="col-md-8" style="font-size:1.5em;">
+            <h2>Tech Used:</h2>
+            <p>
+                Frontend - HTML, CSS, JS, ASP.NET MVC EF
+            </p>
+            <p>Middle - C#, Linq, Razor</p>
+            <p>Backend - SSMS SQL</p>
+            <p>IDE - Visual Studio</p>
+        </div>
+    </div>
+    <br />
+    
 </div>

@@ -358,6 +358,7 @@
     <Content Include="Content\imgs\2.png" />
     <Content Include="Content\imgs\268736_preview.png" />
     <Content Include="Content\imgs\88-512.png" />
+    <Content Include="Content\imgs\aboutlmslogo.png" />
     <Content Include="Content\imgs\GettyImages-179708575-57a57c2d5f9b58974aeac9b7.jpg" />
     <Content Include="Content\imgs\invest-1714373_960_720.jpg" />
     <Content Include="Content\imgs\Investing-money-for-beginners_page_1.png" />
@@ -366,6 +367,8 @@
     <Content Include="Content\imgs\Lessons.png" />
     <Content Include="Content\imgs\LMSlogo.png" />
     <Content Include="Content\imgs\LMSlogo2.jpg" />
+    <Content Include="Content\imgs\Team-project-2.jpg" />
+    <Content Include="Content\imgs\Team-project.jpg" />
     <Content Include="Content\imgs\urfandadashov180821833.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

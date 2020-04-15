@@ -11,7 +11,7 @@ namespace LMS.UI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
