@@ -10,11 +10,13 @@ using LMS.DATA;
 
 namespace LMS.UI.Controllers
 {
+    [Authorize(Roles = "Admin, manager, employee")]
     public class CoursController : Controller
     {
         private LMSEntities db = new LMSEntities();
 
         // GET: Cours
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Courses.ToList());

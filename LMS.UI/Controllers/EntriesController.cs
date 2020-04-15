@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace LMS.UI.Controllers
 {
+    [Authorize(Roles = "Admin, manager, employee")]
     public class EntriesController : Controller
     {
         private LMSEntities db = new LMSEntities();

@@ -62,9 +62,17 @@
             @Html.DisplayFor(modelItem => item.Cours.CourseName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LessonId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LessonId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LessonId })
+
+            @Html.ActionLink("Details", "Details", new { id = item.LessonId })
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.LessonId })
+            }
+            
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.LessonId })
+            }
         </td>
     </tr>
 }

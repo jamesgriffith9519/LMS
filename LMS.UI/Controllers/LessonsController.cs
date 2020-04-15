@@ -12,6 +12,7 @@ using System.Net.Mail;
 
 namespace LMS.UI.Controllers
 {
+    [Authorize(Roles = "Admin, manager, employee")]
     public class LessonsController : Controller
     {
         private LMSEntities db = new LMSEntities();
@@ -109,6 +110,7 @@ namespace LMS.UI.Controllers
         }
 
         // GET: Lessons/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName");
@@ -170,6 +172,7 @@ namespace LMS.UI.Controllers
         }
 
         // GET: Lessons/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -203,6 +206,7 @@ namespace LMS.UI.Controllers
         }
 
         // GET: Lessons/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
