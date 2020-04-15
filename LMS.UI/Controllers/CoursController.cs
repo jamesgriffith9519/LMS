@@ -19,7 +19,16 @@ namespace LMS.UI.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            var publishedCourses = db.Courses.Where(x => x.IsActive == true);
+            return View(publishedCourses.ToList());
+            //return View(db.Courses.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult UnpublishedCourses()
+        {
+            var unpublishedCourses = db.Courses.Where(x => x.IsActive == false);
+            return View(unpublishedCourses.ToList());
         }
 
         // GET: Cours/Details/5

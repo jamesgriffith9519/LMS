@@ -4,53 +4,65 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCompleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cours.CourseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="container-fluid" style="margin:2em;">
+    <h2>Completed Courses</h2>
+    @if (User.IsInRole("Admin"))
     {
-
-
-
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCompleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cours.CourseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId })
-            </td>
-        </tr>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
     }
 
-</table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCompleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cours.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+            </th>
+            <th></th>
+        </tr>
 
-<h2 id="test">Total Completed Courses: @ViewBag.Count</h2>
+        @foreach (var item in Model)
+        {
 
-<h2>Courses needed this Year: 6</h2>
 
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCompleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cours.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId })
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId })
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <h2 id="test">Total Completed Courses: @ViewBag.Count</h2>
+
+    <h2>Courses needed this Year: 6</h2>
+</div>
 @section scripts {
     <script>
     </script>

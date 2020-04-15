@@ -53,6 +53,7 @@ namespace LMS.UI.Controllers
             return View(courseCompletion);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: CourseCompletions/Create
         public ActionResult Create()
         {
@@ -79,7 +80,7 @@ namespace LMS.UI.Controllers
             ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", courseCompletion.UserId);
             return View(courseCompletion);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: CourseCompletions/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -114,7 +115,7 @@ namespace LMS.UI.Controllers
             ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", courseCompletion.UserId);
             return View(courseCompletion);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: CourseCompletions/Delete/5
         public ActionResult Delete(int? id)
         {

@@ -358,10 +358,12 @@
     <Content Include="Content\imgs\2.png" />
     <Content Include="Content\imgs\268736_preview.png" />
     <Content Include="Content\imgs\88-512.png" />
+    <Content Include="Content\imgs\GettyImages-179708575-57a57c2d5f9b58974aeac9b7.jpg" />
     <Content Include="Content\imgs\invest-1714373_960_720.jpg" />
     <Content Include="Content\imgs\Investing-money-for-beginners_page_1.png" />
     <Content Include="Content\imgs\investing-strategies-styles.jpg" />
     <Content Include="Content\imgs\iris-increase-productivy-icon-ca.png" />
+    <Content Include="Content\imgs\Lessons.png" />
     <Content Include="Content\imgs\LMSlogo.png" />
     <Content Include="Content\imgs\LMSlogo2.jpg" />
     <Content Include="Content\imgs\urfandadashov180821833.jpg" />
@@ -569,6 +571,7 @@
     <Content Include="Views\Entries\Index.cshtml" />
     <Content Include="Views\CourseCompletions\ManagerIndex.cshtml" />
     <Content Include="Views\LessonViews\ManagerIndex.cshtml" />
+    <Content Include="Views\Cours\UnpublishedCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
