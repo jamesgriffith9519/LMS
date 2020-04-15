@@ -24,6 +24,13 @@ namespace LMS.UI.Controllers
             return View(lessonViews.Where(x => x.UserId == userId).ToList());
         }
 
+        [Authorize(Roles = "manager, Admin")]
+        public ActionResult ManagerIndex()
+        {
+            var lessonCompletions = db.LessonViews.Include(u => u.UserDetail);
+            return View(lessonCompletions.ToList());
+        }
+
         // GET: LessonViews/Details/5
         public ActionResult Details(int? id)
         {

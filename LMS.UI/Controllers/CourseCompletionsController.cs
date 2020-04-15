@@ -28,6 +28,14 @@ namespace LMS.UI.Controllers
            
             //return View(courseCompletions.ToList());
         }
+        [Authorize(Roles = "manager, Admin")]
+        public ActionResult ManagerIndex()
+        {
+            var courseCompletions = db.CourseCompletions.Include(c => c.Cours).Include(u => u.UserDetail);
+            return View(courseCompletions.ToList());
+        }
+
+
 
         // GET: CourseCompletions/Details/5
         public ActionResult Details(int? id)

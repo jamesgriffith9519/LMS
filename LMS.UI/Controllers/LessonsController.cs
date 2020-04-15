@@ -18,8 +18,7 @@ namespace LMS.UI.Controllers
 
         // GET: Lessons
         public ActionResult Index(int? id)
-        {
-            //var lessons = db.Lessons.Include(l => l.Cours); known working
+        {       
             var lessons = db.Lessons.Where(x => x.CourseId == id);
             return View(lessons.ToList());
             //return View(lessons.Where(x => x.Cours.CourseId == x.CourseId).ToList());
@@ -91,15 +90,21 @@ namespace LMS.UI.Controllers
 
             #endregion
 
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Lesson lesson = db.Lessons.Find(id);
-            //if (lesson == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            if (lesson.VideoUrl != null)
+            {
+                var v = lesson.VideoUrl.IndexOf("v=");
+                var amp = lesson.VideoUrl.IndexOf("&", v);
+                string vid;
+                if (amp == -1)
+                {
+                    vid = lesson.VideoUrl.Substring(v + 2);
+                }
+                else
+                {
+                    vid = lesson.VideoUrl.Substring(v + 2, amp - (v + 2));
+                }
+                ViewBag.VideoID = vid;
+            }
             return View(lesson);
         }
 
