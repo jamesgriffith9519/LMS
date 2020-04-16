@@ -575,6 +575,7 @@
     <Content Include="Views\CourseCompletions\ManagerIndex.cshtml" />
     <Content Include="Views\LessonViews\ManagerIndex.cshtml" />
     <Content Include="Views\Cours\UnpublishedCourses.cshtml" />
+    <Content Include="Views\Home\ValueTracker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

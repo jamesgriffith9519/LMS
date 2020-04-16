@@ -26,5 +26,11 @@ namespace LMS.UI.Controllers
 
             return View();
         }
+
+
+        public ActionResult ValueTracker()
+        {
+            return View();
+        }
     }
 }
