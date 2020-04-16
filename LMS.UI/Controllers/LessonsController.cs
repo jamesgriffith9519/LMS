@@ -20,7 +20,7 @@ namespace LMS.UI.Controllers
         // GET: Lessons
         public ActionResult Index(int? id)
         {       
-            var lessons = db.Lessons.Where(x => x.CourseId == id);
+            var lessons = db.Lessons.Where(x => x.CourseId == id && x.IsActive == true);
             return View(lessons.ToList());
             //return View(lessons.Where(x => x.Cours.CourseId == x.CourseId).ToList());
         }
@@ -31,6 +31,20 @@ namespace LMS.UI.Controllers
             var lessons = db.Lessons.Include(l => l.Cours);
             return View(lessons.Where(x => x.Cours.CourseId == x.CourseId).ToList());
         }
+
+        public ActionResult InactiveLessons()
+        {
+            var lessons = db.Lessons.Where(x => x.IsActive == false);
+            return View(lessons.ToList());
+        }
+
+
+        public ActionResult AdminLessons()
+        {
+            var lessons = db.Lessons.ToList();
+            return View(lessons.ToList());
+        }
+
 
         // GET: Lessons/Details/5
         public ActionResult Details(int id)
@@ -164,7 +178,8 @@ namespace LMS.UI.Controllers
 
                 db.Lessons.Add(lesson);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminLessons");
+                
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", lesson.CourseId);

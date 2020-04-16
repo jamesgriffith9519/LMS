@@ -66,9 +66,14 @@
             @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             <a href="@Url.Action("Index","Cours")">Back to List</a>
         </div>
+        <div class="col-md-12"style="height:6em; margin-top:1em; margin-bottom:6em; font-size:2em;">
+            <div class="alert-danger">
+                <p><strong>WARNING!</strong> Deleting a lesson here will cascade and delete employee lesson completion records. To remove without deleting all cascading records, just edit and mark the lesson as inactive. </p>
+            </div>
+        </div>      
         }
     </div>
 </div>
