@@ -17,8 +17,16 @@
         <i class="icon-envelope"></i><strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
         <i class="icon-envelope"></i><strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>
+
+    <button onclick="changeFavicon()">Test</button>
 </div>
 
 @section scripts {
-   
+@*<script> 
+
+    if (navigator.userAgent.indexOf("Firefox") != -1) {
+        document.getElementById("favicon").href = "/Content/imgs/coin2.ico"
+    }
+    
+</script>*@
 }

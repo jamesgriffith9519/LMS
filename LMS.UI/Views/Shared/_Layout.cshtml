@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="icon" href="~/Content/imgs/graphfavicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Content/imgs/graphfavicon.ico" type="image/x-icon" id="favicon">
     @*<link rel="shortcut icon" href="~/Content/imgs/moneycon.ico" type="image/x-icon">*@
 
 </head>
@@ -32,10 +32,10 @@
                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
                     @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
-            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-        }*@
+                        {
+                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        }*@
 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
@@ -112,6 +112,19 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    <!--Scripts-->
+    <script>
+
+        if (navigator.userAgent.indexOf("Firefox") != -1) {
+            document.getElementById("favicon").href = "/Content/imgs/coin2.ico"
+        }
+
+    </script>
+
+
 </body>
+
 
 </html>
