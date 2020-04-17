@@ -87,11 +87,11 @@ namespace LMS.UI.Controllers
                     db.CourseCompletions.Add(completion);
                     db.SaveChanges();
 
-                    string courseCompleter = db.UserDetails.Where(x => x.UserId == userId).FirstOrDefault().UserId;
+                    string courseuser = db.UserDetails.Where(x => x.UserId == userId).FirstOrDefault().FullName;
                     string completedCourse = db.Courses.Where(x => x.CourseId == lesson.CourseId).FirstOrDefault().CourseName;
                     var completedDate = completion.DateCompleted;
 
-                    string courseFinishMessage = $"{courseCompleter} completed the {completedCourse} course on {completedDate}";
+                    string courseFinishMessage = $"{courseuser} completed the {completedCourse} course on {completedDate}";
 
                     MailMessage m = new MailMessage("postmaster@jamesgriffithdev.com", "james.griffith3@outlook.com", "Course Completion", courseFinishMessage);
                     m.IsBodyHtml = true;
