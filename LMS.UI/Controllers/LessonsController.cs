@@ -178,8 +178,9 @@ namespace LMS.UI.Controllers
 
                 db.Lessons.Add(lesson);
                 db.SaveChanges();
-                return RedirectToAction("AdminLessons");
-                
+                return RedirectToAction("index", new { id = lesson.CourseId});
+                //return RedirectToAction("AdminLessons");
+
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", lesson.CourseId);
