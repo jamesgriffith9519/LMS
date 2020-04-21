@@ -16,14 +16,15 @@
     <table class="table">
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UserDetail.FullName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.DateCompleted)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cours.CourseName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-            </th>
+
             <th></th>
         </tr>
 
@@ -32,29 +33,30 @@
 
 
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateCompleted)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cours.CourseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-                </td>
-                <td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId })
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId })
-                    }
-                    @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId })
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCompleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cours.CourseName)
+            </td>
 
-                </td>
-            </tr>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId })
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId })
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId })
+
+            </td>
+        </tr>
         }
 
     </table>
