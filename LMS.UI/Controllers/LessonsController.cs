@@ -254,7 +254,7 @@ namespace LMS.UI.Controllers
                 }
                 db.Entry(lesson).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("index", new { id = lesson.CourseId });
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName", lesson.CourseId);
