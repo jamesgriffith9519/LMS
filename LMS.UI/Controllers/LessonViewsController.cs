@@ -75,6 +75,7 @@ namespace LMS.UI.Controllers
         }
 
         // GET: LessonViews/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -108,7 +109,7 @@ namespace LMS.UI.Controllers
             ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", lessonView.UserId);
             return View(lessonView);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: LessonViews/Delete/5
         public ActionResult Delete(int? id)
         {
